@@ -1,0 +1,148 @@
+A bit of a kludge to enable usage of a hardware mouse inside
+of NWN. 
+
+Portions originally authored by lje/Jens on the NWN forums. 
+It was his modification to keep NWN from disabling the HW
+cursor that originally started this project. 
+
+Standard Legal Shtuff:
+
+I do not guarentee this to work on any computer, except my own.   If it
+should some how allow all the magic smoke to escape your computer, well
+tough.  You were warned.   Avoid swimming for at least three hours after
+using this product.
+
+What little bit of this that is copyrightable is copywritten by David Holland
+david.w.holland@gmail.com.   You may do what you wish with this code so long as
+some credit is given to me, and the copyright is maintained.
+
+If someone would like to send me better installation instructions, I'll
+gladly update the package with them.   Along with any code
+updates.
+
+Flames will be redirected to /dev/null.   As will testy bug reports.
+Friendly bug reports will be examined as time permits.
+
+----> enough disclaimers <----
+
+Things required:
+gcc 
+
+Perl
+
+libelf, including development headers.
+
+automake
+
+autoconf
+
+libtool
+
+XFree86 4.3 (or later) 
+
+The Xcursor library, and development headers. 
+
+Per user reports, specific requirements for Debian include: 
+libelfg0 libelfg0-dev libxcursor1 libxcursor-dev libsdl1.2-dev
+
+If building on x86_64, you will need to install the 32bit 
+development libraries.
+
+----
+
+#) Unpack the nwmouse tar.gz file in your NWN directory.  (But you've
+   probably already done this, if your reading this file.  :-) )
+
+#) execute ./nwmouse_install.pl to build the source code.
+
+#) modify your 'nwn' startup script to include the following lines:
+
+export XCURSOR_PATH=`pwd`
+export XCURSOR_THEME=nwmouse
+export LD_PRELOAD=./nwmouse.so
+
+   before executing nwmain
+
+   If your using nwmovies, the line would look something like so: 
+
+export LD_PRELOAD=./nwmovies.so:./nwmouse.so
+
+#) Do not touch the other SDL_MOUSE_RELATIVE, or SDL_VIDEO_X11_DGAMOUSE lines
+   they've nothing to do with the hardware mouse.
+
+#) You may wish to do something similar for the 
+   dmclient startup script.
+
+#) Enjoy.. 
+
+#) There is a bit of a log file in nwmouse.log.   You may wish to modify
+   your nwn startup script to remove it occasionally.
+
+#) Note if a cursor ever shows up that has not been converted, you will 
+    get the standard X11 cursor.
+
+    Please check nwmouse.log to see what mouse cursor is missing. 
+
+----> Known Issues <-----
+
+None. 
+
+----> Change Log <----
+
+v3.1 09/06/09 Notes:
+
+Fix a libSDL/NVidia driver related issue.  
+Note, I don't play NWN much anymore, nor do I really frequent the forums, so 
+I don't support any of these much, sorry. 
+
+END 09/06/09 Notes
+
+v3.0 01/23/08 Notes: 
+
+x86_64 Support, and a slightly changed build proceedure.  
+Validated to work with 1.68 1.69b2
+
+Distribute the mouse cursors pre-converted.
+
+My thanks to Eyrdan, and Skildron on the NWN forums for their help
+getting this to work on x86_64. 
+
+END 01/23/08 Notes.
+
+02/16/2004 Updated mouse convert script to work w/ both ImageMagick 
+   		5.x, and 6.x
+
+v2.2 Notes: 
+
+09/24/2004 Updates for 1.64beta3 (and probably 1.64).
+
+v2.1 Notes: 
+
+Long outstanding rotated mouse cursors not being drawn bug 
+finally squash.  Death to Quaternions (or my Trigonometry 
+abilities.  Your choice.) 
+
+As always, whack nwmouse.ini when upgrading.
+
+v2.0 Notes:
+
+Uses new and improved technique for overriding the mouse cursors.
+(Funny, I finally found a use for C++.) 
+
+You should now _NEVER_ see the software cursor being drawn. 
+If you do, then contact me, and I'll probably have to walk 
+you through some debugging, as I whack the only mouse cursor
+object I know of. 
+
+v1.0 Notes:
+
+Doesn't work real well on i810 graphics adapters.  But then
+again NWN isn't real playable on that platform anyways, even
+w/ this hack.
+
+Appears to work OK on my NVidia card, even though I don't need
+it there. 
+
+David Holland
+01/23/08
+david.w.holland@gmail.com

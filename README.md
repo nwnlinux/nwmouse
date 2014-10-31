@@ -1,4 +1,1 @@
-nwmouse
-=======
-
-NWN Linux Hardware Mouse
+nwmouse.README.txt
